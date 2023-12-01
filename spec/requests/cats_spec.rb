@@ -23,7 +23,7 @@ end
     it "creates a cat" do
     cat_params = {
         cat:( {
-          name: 'Luca',
+        name: 'Luca',
         age: 1,
         enjoys: 'Running around and keeping his humans up at night.',
         image: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80'
