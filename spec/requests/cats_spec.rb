@@ -139,7 +139,7 @@ end
       post '/cats', params: cat_params
       expect(response.status).to eq 422
       cat = JSON.parse(response.body)
-      expect(cat['enjoys']).to include "can't be blank"
+      expect(cat['enjoys']).to include "can't be blank" 
     end
 
     it "doesn't create a cat without an image" do 
@@ -213,6 +213,21 @@ end
       expect(response.status).to eq 422
       cat = JSON.parse(response.body)
       expect(cat['image']).to include "can't be blank"
+    end
+
+    it "enjoys should be at least 10 minimum charcters long" do 
+    cat_params = {
+      cat: {
+        name:'kat',
+        age: 3,
+        enjoys: 'Eating.',
+        image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+      }
+    }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['enjoys']).to include "is too short (minimum is 10 characters)"    
     end
   end
 end
