@@ -21,8 +21,8 @@ RSpec.describe Cat, type: :model do
     expect(cat.errors[:image]).to_not be_empty
   end
 
-  it "should be at least 10 charcters long" do
-    cat = Cat.create(name: 'lila', age: 2,image: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1015&q=80' )
+  it "enjoys should be at least 10 minimum charcters long" do
+    cat = Cat.create(name: 'lila', age: 2, enjoys: 'eating', image: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1015&q=80' )
     expect(cat.errors[:enjoys]).to_not be_empty
   end
 end
