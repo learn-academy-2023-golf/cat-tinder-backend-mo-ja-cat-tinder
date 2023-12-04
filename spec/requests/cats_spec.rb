@@ -97,4 +97,137 @@ end
      expect(cats).to be_empty
     end
   end
+
+  describe "cannot create a cat without valid attributes" do 
+    it "doesn't create a cat without a name" do 
+      cat_params = {
+        cat: {
+          age: 3,
+          enjoys: 'Likes to go on candle lit dinners.',
+          image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+        }
+      }
+
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['name']).to include "can't be blank"
+    end
+
+    it "doesn't create a cat without an age" do 
+      cat_params = {
+        cat: {
+          name:'kat',
+          enjoys: 'Likes to go on candle lit dinners.',
+          image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+        }
+      }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['age']).to include "can't be blank"
+    end
+
+    it "doesn't create a cat without an enjoys" do 
+      cat_params = {
+        cat: {
+          name:'kat',
+          age: 3,
+          image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+        }
+      }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['enjoys']).to include "can't be blank" 
+    end
+
+    it "doesn't create a cat without an image" do 
+    cat_params = {
+      cat: {
+        name:'kat',
+        age: 3,
+        enjoys: 'Likes to go on candle lit dinners.'
+      }
+    }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['image']).to include "can't be blank"
+    end
+  end
+
+  describe "cannot update a cat without valid attributes" do 
+    it "doesn't update a cat without a name" do 
+      cat_params = {
+        cat: {
+          age: 3,
+          enjoys: 'Likes to go on candle lit dinners.',
+          image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+        }
+      }
+
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['name']).to include "can't be blank"
+    end
+
+    it "doesn't update a cat without an age" do 
+      cat_params = {
+        cat: {
+          name:'kat',
+          enjoys: 'Likes to go on candle lit dinners.',
+          image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+        }
+      }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['age']).to include "can't be blank"
+    end
+
+    it "doesn't update a cat without an enjoys" do 
+      cat_params = {
+        cat: {
+          name:'kat',
+          age: 3,
+          image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+        }
+      }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['enjoys']).to include "can't be blank"
+    end
+
+    it "doesn't update a cat without an image" do 
+    cat_params = {
+      cat: {
+        name:'kat',
+        age: 3,
+        enjoys: 'Likes to go on candle lit dinners.'
+      }
+    }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['image']).to include "can't be blank"
+    end
+
+    it "enjoys should be at least 10 minimum charcters long" do 
+    cat_params = {
+      cat: {
+        name:'kat',
+        age: 3,
+        enjoys: 'Eating.',
+        image: 'https://images.unsplash.com/photo-1492370284958-c20b15c692d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80'
+      }
+    }
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      cat = JSON.parse(response.body)
+      expect(cat['enjoys']).to include "is too short (minimum is 10 characters)"    
+    end
+  end
 end
